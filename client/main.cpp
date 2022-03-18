@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "app_window.hpp"
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
@@ -29,7 +30,10 @@ int main(int argc, char** argv)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::ShowDemoWindow();
+        static app_window app;
+        app.draw();
+
+        //ImGui::ShowDemoWindow();
 
         ImGui::Render();
 

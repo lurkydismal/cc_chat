@@ -3,6 +3,8 @@ project(chat)
 
 add_executable(${PROJECT_NAME} 
     main.cpp
+    app_window.cpp
+    imgui_stdlib.cpp
     imgui/imgui_impl_glfw.cpp
     imgui/imgui_impl_opengl3.cpp
 )
