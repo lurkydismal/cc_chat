@@ -13,7 +13,10 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_cmake_run(
     REQUIRES
         glfw/3.3.6
+        imgui/1.87
     BUILD missing
+    IMPORTS "./res/bindings, imgui_impl_opengl3* -> ${CMAKE_CURRENT_SOURCE_DIR}/client/imgui @ root_package=imgui"
+    IMPORTS "./res/bindings, imgui_impl_glfw* -> ${CMAKE_CURRENT_SOURCE_DIR}/client/imgui @ root_package=imgui"
     BASIC_SETUP CMAKE_TARGETS
 )
 

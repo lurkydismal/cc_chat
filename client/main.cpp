@@ -1,4 +1,7 @@
 #include <GLFW/glfw3.h>
+#include <imgui.h>
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
@@ -12,14 +15,29 @@ int main(int argc, char** argv)
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui::GetIO().IniFilename = nullptr;
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
 
     while(!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
+
+        ImGui_ImplGlfw_NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::ShowDemoWindow();
+
+        ImGui::Render();
+
         int vp_width, vp_height;
         glfwGetFramebufferSize(window, &vp_width, &vp_height);
         glViewport(0, 0, vp_width, vp_height);
         glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
 
