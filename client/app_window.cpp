@@ -41,6 +41,11 @@ void app_window::draw()
         input.clear();
         reclaim_focus = true;
     }
+    ImGui::SetItemDefaultFocus();
+    if (reclaim_focus)
+    {
+        ImGui::SetKeyboardFocusHere(-1);
+    }
 #ifndef NDEBUG
     ImGui::SameLine();
     if (ImGui::Button("Debug text"))
@@ -49,11 +54,6 @@ void app_window::draw()
             items.push_back("Debug text");
     }
 #endif
-    ImGui::SetItemDefaultFocus();
-    if (reclaim_focus)
-    {
-        ImGui::SetKeyboardFocusHere(-1);
-    }
     ImGui::End();
 }
 
