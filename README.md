@@ -1,4 +1,7 @@
 # cc_chat
+A simple chat for my team
+
+# dependencies
 Requires conan, cmake and c++ compiler
 
 # compiling
