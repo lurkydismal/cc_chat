@@ -16,13 +16,13 @@ namespace cc
                 this->clear();
             }
         public:
-            const T& front() const
+            const T& front()
             {
                 std::scoped_lock lock(mutex_queue);
                 return queue.front();
             }
 
-            const T& back() const
+            const T& back()
             {
                 std::scoped_lock lock(mutex_queue);
                 return queue.back();
@@ -60,13 +60,13 @@ namespace cc
                 return temp;
             }
 
-            bool empty() const
+            bool empty()
             {
                 std::scoped_lock lock(mutex_queue);
                 return queue.empty();
             }
 
-            size_t size() const
+            size_t size()
             {
                 std::scoped_lock lock(mutex_queue);
                 return queue.size();

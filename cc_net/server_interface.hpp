@@ -87,7 +87,7 @@ namespace cc
             {
                 return false;
             }
-            virtual void event_message(std::shared_ptr<connection<T>> client, const packet<T>& packet)
+            virtual void event_message(std::shared_ptr<connection<T>> client, packet<T>& packet)
             {
 
             }

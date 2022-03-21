@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "auth_window.hpp"
+#include "client.hpp"
 
 class app_window
 {
@@ -16,5 +16,5 @@ private:
     std::string input;
     std::vector<std::string> items;
     bool scroll_to_bottom;
-    auth_window auth;
+    client server;
 };

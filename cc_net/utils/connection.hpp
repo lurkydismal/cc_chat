@@ -53,10 +53,10 @@ namespace cc
             void send(const packet<T>& packet)
             {
                 asio::post(asio_context, 
-                [this, msg]()
+                [this, packet]()
                 {
                     bool b = !output_queue.empty();
-                    output_queue.push_back(msg);
+                    output_queue.push_back(packet);
                     if (!b)
                         write_header();
                 });

@@ -4,6 +4,10 @@
 
 app_window::app_window()
 {
+    server.connect("127.0.0.1", 1337);
+    packet_t packet;
+    packet = actions::ping;
+    server.send(packet);
     scroll_to_bottom = false;
 }
 
@@ -19,10 +23,13 @@ void app_window::draw()
     ImGui::SetNextWindowSize(viewport->WorkSize);
     ImGui::Begin("main", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDecoration);
 
-    ImGui::Text("Hello, world!");
-    if (!auth.is_authorized())
+    if (!server.is_connected())
     {
-        auth.draw();
+        ImGui::Text("Establishing connection to the server...");
+    }
+    else if (!server.is_authorized())
+    {
+        server.draw();
     }
     else
     {

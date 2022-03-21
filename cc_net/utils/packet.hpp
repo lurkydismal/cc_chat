@@ -34,6 +34,28 @@ namespace cc
                 return !(*this == rhs);
             }
 
+            packet<T>& operator<<(const std::string& rhs)
+            {
+                buff.resize(this->header.size + rhs.size() + sizeof(uint32_t));
+                memcpy(buff.data() + this->header.size, rhs.data(), rhs.size());
+                uint32_t str_size = rhs.size();
+                memcpy(buff.data() + this->header.size + rhs.size(), &str_size, sizeof(uint32_t));
+                this->header.size += rhs.size() + sizeof(uint32_t);
+                return *this;
+            }
+
+            packet<T>& operator>>(std::string& rhs)
+            {
+                uint32_t str_size;
+                this->header.size -= sizeof(uint32_t);
+                memcpy(&str_size, buff.data() + this->header.size, sizeof(uint32_t));
+                this->header.size -= str_size;
+                rhs.resize(str_size);
+                memcpy(rhs.data(), buff.data() + this->header.size, str_size);
+                buff.resize(this->header.size);
+                return *this;
+            }
+
             template<typename data_type>
             packet<T>& operator<<(const data_type& rhs)
             {
