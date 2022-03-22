@@ -71,6 +71,18 @@ protected:
             client.reset();
             connections.erase(std::remove(connections.begin(), connections.end(), client), connections.end());
         }
+        else if(packet == actions::msg)
+        {
+            std::string msg;
+            packet >> msg;
+            std::string return_msg = client->get_name() + ": " + msg;
+            return_packet = actions::msg;
+            return_packet << return_msg;
+            for (auto& user : clients)
+            {
+                user.second->send(return_packet);
+            }
+        }
     }
 
 protected:

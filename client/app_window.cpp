@@ -40,6 +40,16 @@ void app_window::draw()
     }
     else
     {
+        if(!server.incoming().empty())
+        {
+            auto answer = server.incoming().pop_front();
+            if (answer.packet == actions::msg)
+            {
+                std::string buff;
+                answer.packet >> buff;
+                enter_message(buff);
+            }
+        }
         ImGui::Separator();
         const float footer_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
         ImGui::BeginChild("chat", ImVec2(0, -footer_reserve), false, ImGuiWindowFlags_HorizontalScrollbar);
@@ -56,7 +66,12 @@ void app_window::draw()
         if (ImGui::InputText("input", &input, ImGuiInputTextFlags_EnterReturnsTrue))
         {
             if (!input.empty())
-                enter_message(input);
+            {
+                packet_t packet;
+                packet = actions::msg;
+                packet << input;
+                server.send(packet);
+            }
             input.clear();
             reclaim_focus = true;
         }
