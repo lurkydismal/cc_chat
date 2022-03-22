@@ -4,6 +4,9 @@
 enum class actions : uint32_t
 {
     auth,
+    auth_no_user,
+    auth_incorrect_passwd,
+    auth_success,
     ping,
     msg,
     disconnect
@@ -19,6 +22,7 @@ class client : public cc::net::client_interface<actions>
 {
 public:
     client() = default;
+    virtual ~client();
 public:
     void draw();
     bool is_authorized();
@@ -26,4 +30,6 @@ public:
 private:
     std::string input_login;
     std::string input_passwd;
+    std::string last_error;
+    bool authorized = false;
 };
