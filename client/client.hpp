@@ -6,6 +6,7 @@ enum class actions : uint32_t
     auth,
     auth_no_user,
     auth_incorrect_passwd,
+    auth_online,
     auth_success,
     ping,
     msg,
@@ -27,6 +28,7 @@ public:
     void draw();
     bool is_authorized();
     void auth(const std::string &login, const std::string &passwd);
+    void logout();
 private:
     std::string input_login;
     std::string input_passwd;

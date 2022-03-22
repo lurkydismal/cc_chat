@@ -77,6 +77,21 @@ namespace cc
             {
                 return id;
             }
+
+            void set_name(const std::string& value)
+            {
+                name = value;
+            }
+
+            std::string get_name() const
+            {
+                return name;
+            }
+
+            std::string get_ip() const
+            {
+                return socket.remote_endpoint().address().to_string();
+            }
         private:
             void read_header()
             {
@@ -173,6 +188,7 @@ namespace cc
             owner_type parent;
             packet<T> input_temp_packet;
             uint32_t id = 0;
+            std::string name;
         };
     }
 }

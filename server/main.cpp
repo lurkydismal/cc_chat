@@ -7,6 +7,7 @@ enum class actions : uint32_t
     auth,
     auth_no_user,
     auth_incorrect_passwd,
+    auth_online,
     auth_success,
     ping,
     msg,
@@ -29,6 +30,8 @@ protected:
     void event_client_disconnect(std::shared_ptr<cc::net::connection<actions>> client) override
     {
         client->close();
+        if(!client->get_name().empty())
+            clients.erase(clients.find(client->get_name()));
         std::cout << "[" << client->get_id() << "] Disconnected." << std::endl;
     }
 
@@ -39,23 +42,28 @@ protected:
         {
             std::string login, passwd;
             packet >> passwd >> login;
-            std::cout << "[" << client->get_id() << "] Auth" << std::endl << "Login: " << login << " Password: " << passwd << std::endl;
+            std::cout << "[" << client->get_id() << "] Auth" << std::endl;
             auto users_it = users.find(login);
             if (users_it == users.end())
             {
                 return_packet = actions::auth_no_user;
-                this->send(client, return_packet);
             }
             else if (users_it->second != passwd)
             {
                 return_packet = actions::auth_incorrect_passwd;
-                this->send(client, return_packet);
+            }
+            else if(clients.find(login) != clients.end())
+            {
+                return_packet = actions::auth_online;
             }
             else
             {
                 return_packet = actions::auth_success;
-                this->send(client, return_packet);
+                client->set_name(login);
+                std::cout << "[" << client->get_id() << "] " << login << " logged in." << std::endl;
+                clients.insert({ login, client });
             }
+            this->send(client, return_packet);
         }
         else if(packet == actions::disconnect)
         {
@@ -67,7 +75,7 @@ protected:
 
 protected:
     std::map<std::string, std::string> users;
-    
+    std::map<std::string, std::shared_ptr<cc::net::connection<actions>>> clients;
 };
 
 int main (int argc, char** argv)

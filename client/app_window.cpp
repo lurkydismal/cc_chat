@@ -1,6 +1,7 @@
 #include "app_window.hpp"
 #include <imgui.h>
 #include "imgui_stdlib.h"
+#include <chrono>
 
 app_window::app_window()
 {
@@ -26,6 +27,12 @@ void app_window::draw()
     if (!server.is_connected())
     {
         ImGui::Text("Establishing connection to the server...");
+        server.logout();
+        server.disconnect();
+        server.connect("127.0.0.1", 1337);
+        packet_t packet;
+        packet = actions::ping;
+        server.send(packet);
     }
     else if (!server.is_authorized())
     {

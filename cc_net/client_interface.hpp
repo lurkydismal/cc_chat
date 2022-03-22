@@ -24,8 +24,11 @@ namespace cc
                     asio::ip::tcp::resolver::results_type endpoints = asio::ip::tcp::resolver(asio_context).resolve(host, std::to_string(port));
                     server_connection = std::make_unique<connection<T>>(connection<T>::owner_type::client, asio_context, asio::ip::tcp::socket(asio_context), input_queue);
                     server_connection->connect_to_server(endpoints);
-                    context_thread = std::thread([this](){ asio_context.run(); });
-                    
+                    context_thread = std::thread(
+                        [this]()
+                        { 
+                            asio_context.run();
+                        });
                 } catch(...)
                 {
                     return false;
@@ -39,6 +42,7 @@ namespace cc
                 asio_context.stop();
                 if (context_thread.joinable())
                     context_thread.join();
+                asio_context.reset();
                 server_connection.release();
             }
             bool is_connected()

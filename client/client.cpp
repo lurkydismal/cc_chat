@@ -44,6 +44,11 @@ void client::auth(const std::string &login, const std::string &passwd)
     this->send(packet);
 }
 
+void client::logout()
+{
+    authorized = false;
+}
+
 bool client::is_authorized()
 {
     if (authorized)
@@ -64,6 +69,11 @@ bool client::is_authorized()
     if (answer.packet == actions::auth_incorrect_passwd)
     {
         last_error = "Incorrect password.";
+        return false;
+    }
+    if (answer.packet == actions::auth_online)
+    {
+        last_error = "User " + input_login + " is online.";
         return false;
     }
     return false;
