@@ -5,7 +5,7 @@
 
 app_window::app_window()
 {
-    server.connect("127.0.0.1", 1337);
+    server.connect(SERVER_HOST, SERVER_PORT);
     packet_t packet;
     packet = actions::ping;
     server.send(packet);
@@ -29,7 +29,7 @@ void app_window::draw()
         ImGui::Text("Establishing connection to the server...");
         server.logout();
         server.disconnect();
-        server.connect("127.0.0.1", 1337);
+        server.connect(SERVER_HOST, SERVER_PORT);
         packet_t packet;
         packet = actions::ping;
         server.send(packet);

@@ -1,6 +1,9 @@
 #include <iostream>
 #include <map>
 #include <server_interface.hpp>
+#include <soci/soci.h>
+#include <soci/mysql/soci-mysql.h>
+#include <stdexcept>
 
 enum class actions : uint32_t
 {
@@ -17,9 +20,44 @@ enum class actions : uint32_t
 class server : public cc::net::server_interface<actions>
 {
 public:
-    server(uint16_t port): cc::net::server_interface<actions>(port)
+    server(uint16_t server_port, std::string mysql_db, std::string mysql_user, std::string mysql_passwd, std::string mysql_host = "localhost", uint16_t mysql_port = 3306)
+        : cc::net::server_interface<actions>(server_port), db_session(soci::mysql, "db=" + mysql_db + " user=" + mysql_user + " password='" + mysql_passwd + "' host=" + mysql_host + " port=" + std::to_string(mysql_port))
     {
-        users.insert({ "arsenez", "04C0C3501F0140B94BDC2155ECEBF2D835CE539D878F65ACF813A354F5F168BA1F6D176068B9C15AD8B545ADA8F98A9C4798E2DB1DE8F245F0154F5A4F5CDE5C" });
+        if(!db_session.is_connected())
+            throw std::runtime_error("Unable to connect to DB");
+        soci::rowset<std::string> tables(db_session.prepare << "show tables");
+        bool table_exists = false;
+        for (auto& table : tables)
+        {
+            if (table == "users") 
+            {
+                table_exists = true;
+                soci::rowset<soci::row> fields(db_session.prepare << "describe users");
+                bool field_user = false, field_passwd = false;
+                for (auto field = fields.begin(); field != fields.end(); field++)
+                {
+                    if (field->get<std::string>("Field") == "user")
+                    {
+                        field_user = true;
+                        if (field->get<std::string>("Type") != "text")
+                            db_session.alter_column("users", "user", soci::data_type::dt_string);
+                    }
+                    else if (field->get<std::string>("Field") == "passwd")
+                    {
+                        field_passwd = true;
+                        if (field->get<std::string>("Type") != "text")
+                            db_session.alter_column("users", "passwd", soci::data_type::dt_string);
+                    }
+                }
+                if (!field_user)
+                    db_session.add_column("users", "user", soci::data_type::dt_string);
+                if (!field_passwd)
+                    db_session.add_column("users", "passwd", soci::data_type::dt_string);
+                break;
+            }
+        }
+        if (!table_exists)
+            db_session.create_table("users").column("user", soci::data_type::dt_string).column("passwd", soci::data_type::dt_string);
     }
 protected:
     bool event_client_connect(std::shared_ptr<cc::net::connection<actions>> client) override
@@ -43,12 +81,13 @@ protected:
             std::string login, passwd;
             packet >> passwd >> login;
             std::cout << "[" << client->get_id() << "] Auth" << std::endl;
-            auto users_it = users.find(login);
-            if (users_it == users.end())
+            std::string db_passwd;
+            db_session.once << "select passwd from users where user=:login", soci::use(login), soci::into(db_passwd);
+            if(db_passwd.empty())
             {
                 return_packet = actions::auth_no_user;
             }
-            else if (users_it->second != passwd)
+            else if(db_passwd != passwd)
             {
                 return_packet = actions::auth_incorrect_passwd;
             }
@@ -86,17 +125,25 @@ protected:
     }
 
 protected:
-    std::map<std::string, std::string> users;
+    soci::session db_session;
     std::map<std::string, std::shared_ptr<cc::net::connection<actions>>> clients;
 };
 
 int main (int argc, char** argv)
 {
-    server server(1337);
-    server.start();
-    while(true)
+    try
     {
-        server.update();
+        server server(SERVER_PORT, MYSQL_DB, MYSQL_USER, MYSQL_PASSWD);
+        server.start();
+        while(true)
+        {
+            server.update();
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
     }
     return 0;
 }

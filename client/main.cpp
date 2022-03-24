@@ -34,8 +34,6 @@ int main(int argc, char** argv)
         static app_window app;
         app.draw();
 
-        //ImGui::ShowDemoWindow();
-
         ImGui::Render();
 
         int vp_width, vp_height;
