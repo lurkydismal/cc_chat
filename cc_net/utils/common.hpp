@@ -6,6 +6,7 @@
 #include <deque>
 #include <mutex>
 #include <condition_variable>
+#include <chrono>
 #include <memory>
 #include <thread>
 #include <exception>

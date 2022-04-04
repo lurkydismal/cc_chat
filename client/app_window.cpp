@@ -6,9 +6,6 @@
 app_window::app_window()
 {
     server.connect(SERVER_HOST, SERVER_PORT);
-    packet_t packet;
-    packet = actions::ping;
-    server.send(packet);
     scroll_to_bottom = false;
 }
 
@@ -30,9 +27,6 @@ void app_window::draw()
         server.logout();
         server.disconnect();
         server.connect(SERVER_HOST, SERVER_PORT);
-        packet_t packet;
-        packet = actions::ping;
-        server.send(packet);
     }
     else if (!server.is_authorized())
     {

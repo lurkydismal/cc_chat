@@ -19,7 +19,19 @@ namespace cc
         public:
             connection(owner_type parent, asio::io_context& asio_context, asio::ip::tcp::socket socket, mtqueue<owned_packet<T>>& input_queue)
                 : parent(parent), asio_context(asio_context), socket(std::move(socket)), input_queue(input_queue)
-            {}
+            {
+                if (parent == owner_type::server)
+                {
+                    output_handshake = static_cast<uint64_t>(std::chrono::system_clock::now().time_since_epoch().count());
+                    right_handshake = encrypt(output_handshake);
+                    input_handshake = 0;
+                }
+                else
+                {
+                    output_handshake = 0;
+                    input_handshake = 0;
+                }
+            }
             virtual ~connection()
             {
                 this->close();
@@ -33,7 +45,9 @@ namespace cc
                     [this](std::error_code ec, asio::ip::tcp::endpoint ep)
                     {
                         if (!ec)
-                            read_header();
+                            read_handshake();
+                        else
+                            socket.close();
                     });
                 }
             }
@@ -45,7 +59,7 @@ namespace cc
                     if (socket.is_open())
                     {
                         id = uid;
-                        read_header();
+                        write_handshake();
                     }
                 }
             }
@@ -93,6 +107,52 @@ namespace cc
                 return socket.remote_endpoint().address().to_string();
             }
         private:
+            void read_handshake()
+            {
+                asio::async_read(socket, asio::buffer(&input_handshake, sizeof(uint64_t)),
+                [this](std::error_code ec, size_t length)
+                {
+                    if (!ec)
+                    {
+                        if (parent == owner_type::client)
+                        {
+                            output_handshake = encrypt(input_handshake);
+                            write_handshake();
+                        }
+                        else
+                        {
+                            if (input_handshake == right_handshake)
+                                read_header();
+                            else
+                                socket.close();
+                        }
+                    }
+                    else
+                    {
+                        socket.close();
+                    }
+                });
+            }
+
+            void write_handshake()
+            {
+                asio::async_write(socket, asio::buffer(&output_handshake, sizeof(uint64_t)),
+                [this](std::error_code ec, size_t length)
+                {
+                    if (!ec)
+                    {
+                        if (parent == owner_type::client)
+                            read_header();
+                        else
+                            read_handshake();
+                    }
+                    else
+                    {
+                        socket.close();
+                    }
+                });
+            }
+
             void read_header()
             {
                 asio::async_read(socket, asio::buffer(&input_temp_packet.header, sizeof(packet_header<T>)),
@@ -180,6 +240,13 @@ namespace cc
                     input_queue.push_back({ this->shared_from_this(), std::move(input_temp_packet) });
                 read_header();
             }
+
+            uint64_t encrypt(uint64_t data)
+            {
+                data = data ^ 0xBADC0DEDEADAAAAA;
+                data = (data & 0xA0B0C0D0E0F01020) << 4 | (data & 0x30405060708090A0) >> 4;
+                return data ^ 0xC0DEFACE02042022;
+            }
         protected:
             asio::io_context& asio_context;
             asio::ip::tcp::socket socket;
@@ -189,6 +256,9 @@ namespace cc
             packet<T> input_temp_packet;
             uint32_t id = 0;
             std::string name;
+            uint64_t input_handshake;
+            uint64_t output_handshake;
+            uint64_t right_handshake;
         };
     }
 }
