@@ -6,7 +6,7 @@
 #include <soci/soci.h>
 #include <soci/mysql/soci-mysql.h>
 
-enum actions_t {
+enum class actions : uint32_t {
     auth,
     auth_no_user,
     auth_incorrect_passwd,
