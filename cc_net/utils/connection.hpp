@@ -22,7 +22,7 @@ namespace cc {
             uint64_t right_handshake;
 
         public:
-            typedef enum owner_t {
+            enum owner_t {
                 server,
                 client
             };
