@@ -56,7 +56,7 @@ int main( const int argc, const char* argv[] ) {
 
     if ( !SQLConnection.is_connected() ) {
         throw (
-            std::runtime_error( "Unable to connect to mysql server" )
+            std::exception( "Unable to connect to mysql server" )
         );
     }
 
@@ -69,7 +69,7 @@ int main( const int argc, const char* argv[] ) {
 
     if ( !tableContent.empty() ) {
         throw (
-            std::runtime_error( "User exists" )
+            std::exception( "User exists" )
         );
     }
 

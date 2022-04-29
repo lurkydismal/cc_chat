@@ -162,7 +162,9 @@ void listen( void ) {
 template < typename eventType >
 void idle( eventType event ) {
     for ( ;; ) {
-        event();
+        if ( !event() ) {
+            break;
+        }
     }
 }
 
@@ -173,6 +175,7 @@ int main ( int argc, char* argv[] ) {
             cc::net::connection< actions_t >
         >
     > clients;
+    mtqueue< owned_packet< actions_t > > input_queue;
     asio::io_context asio_context;
     soci::session db_session;
     uint16_t server_port = SERVER_PORT;
@@ -209,7 +212,7 @@ int main ( int argc, char* argv[] ) {
 
     if( !db_session.is_connected() ) {
         throw (
-            std::runtime_error( "Unable to connect" )
+            std::exception( "Unable to connect" )
         );
     }
 
