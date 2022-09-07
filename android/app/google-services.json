@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "281974033826",
+    "project_id": "cc-chat-ba670",
+    "storage_bucket": "cc-chat-ba670.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281974033826:android:d1708d27935a2260fa36fb",
+        "android_client_info": {
+          "package_name": "com.example.cc_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281974033826-cap2mmk1gi27ah8qsgsf5hj9t940moig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL-zY1boWMZhSJpUDZxQFpPMLjPbj_Bfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281974033826-cap2mmk1gi27ah8qsgsf5hj9t940moig.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "281974033826-9o2qjlou0eorpu4d7hmfsvavk1ket1rm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ccChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

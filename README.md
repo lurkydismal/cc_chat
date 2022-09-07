@@ -1,18 +1,16 @@
 # cc_chat
-A simple chat for my team
 
-# dependencies
-Requires conan, cmake and c++ compiler
+A new Flutter project.
 
-# compiling
-Choose your setup by specifying `BUILD_CLIENT` and/or `BUILD_SERVER`
-- When you choose `BUILD_CLIENT`, specify `SERVER_PORT` and `SERVER_HOST`
-- When you choose `BUILD_SERVER`, specify `SERVER_PORT`, `MYSQL_PORT`, `MYSQL_HOST`, `MYSQL_DB`, `MYSQL_USER` and `MYSQL_PASSWD`.
-```
-mkdir build
-cd build
-cmake .. -DBUILD_CLIENT=YES -DSERVER_PORT=1337 -DSERVER_HOST=localhost
-make
-make install
-```
-the binaries will be located at `bin` directory
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
