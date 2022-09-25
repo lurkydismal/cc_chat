@@ -85,7 +85,7 @@ class _ChatterScreenState extends State<ChatterScreen> {
                       fontSize: 16,
                       color: Colors.deepPurple),
                 ),
-                Text("by ur mom",
+                Text("by LurkyDismal",
                     style: TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 8,

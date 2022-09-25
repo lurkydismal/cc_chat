@@ -173,7 +173,7 @@ class _ChatterLoginState extends State<ChatterLogin> {
                   const Hero(
                     tag: "footer",
                     child: Text(
-                      "Made with ♥ by ur mom",
+                      "Made by LurkyDismal",
                       style: TextStyle(fontFamily: "Poppins"),
                     ),
                   )

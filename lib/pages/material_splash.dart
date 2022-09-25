@@ -109,7 +109,7 @@ class _ChatterHomeState extends State<ChatterHome>
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
               ),
-              const Text("Made with ♥ by ur mom")
+              const Text("Made by LurkyDismal")
             ],
           ),
         ),
