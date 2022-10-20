@@ -21,7 +21,7 @@ jobs:
       # Note: This workflow uses the latest stable version of the Flutter SDK.
       - uses: dart-lang/setup-dart@196f54580e9eee2797c57e85e289339f85e6779d
         with:
-          sdk: "dev"
+          sdk: 'dev'
       - uses: flutter-actions/setup-flutter@v2.2
 
       - name: Install dependencies
