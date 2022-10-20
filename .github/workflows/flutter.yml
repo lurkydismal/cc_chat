@@ -18,15 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Note: This workflow uses the latest stable version of the Flutter SDK.
+      - uses: flutter-actions/setup-flutter@v2.2
+
       - uses: dart-lang/setup-dart@196f54580e9eee2797c57e85e289339f85e6779d
         with:
           sdk: 'dev'
-
-      - uses: flutter-actions/setup-flutter@v2.2
-        with:
-          version: '3.5.0-9.0.pre.19'
-          channel: 'beta'
 
       - name: Install dependencies
         run: flutter pub get
