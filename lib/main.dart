@@ -1,37 +1,72 @@
-// import "package:cc_chat/pages/chat.dart";
-import "package:cc_chat/pages/login.dart" show ChatterLogin;
-import 'package:cc_chat/pages/sign_up.dart' show ChatterSignUp;
-import "package:flutter/material.dart";
-import "package:cc_chat/pages/chatter_screen.dart" show ChatterScreen;
-import "pages/material_splash.dart" show ChatterHome;
+import "dart:io" show Platform;
 
-Future<void> main() async {
-  runApp(const ChatterApp());
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+
+// import "package:cc_chat/chat/chat_cupertino.dart";
+import "package:cc_chat/chat/chat_material.dart";
+import "package:cc_chat/config.dart" as config;
+// import "package:cc_chat/login/login_cupertino.dart";
+import "package:cc_chat/login/login_material.dart";
+// import "package:cc_chat/sign_up/sign_up_cupertino.dart";
+import "package:cc_chat/sign_up/sign_up_material.dart";
+// import "package:cc_chat/splash/splash_cupertino.dart";
+import "package:cc_chat/splash/splash_material.dart";
+
+void main() {
+  runApp(const ChatApp());
 }
 
-class ChatterApp extends StatelessWidget {
-  const ChatterApp({super.key});
+class ChatApp extends StatelessWidget {
+  const ChatApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Chatter",
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(
-            fontFamily: "Poppins",
+    if (Platform.isIOS || Platform.isMacOS) {
+      return CupertinoApp(
+        title: config.title,
+        // theme: MaterialBasedCupertinoThemeData(
+        //   materialTheme: getMaterialThemeData,
+        // ),
+        initialRoute: "/",
+        routes: getPlatformSpecificRoutes,
+      );
+    } else {
+      return MaterialApp(
+        title: config.title,
+        // theme: getMaterialThemeData,
+        initialRoute: "/",
+        routes: getPlatformSpecificRoutes,
+      );
+    }
+  }
+}
+
+ThemeData get getMaterialThemeData {
+  return ThemeData.localize(
+    ThemeData.dark(),
+    Typography.englishLike2021.merge(Typography.blackRedmond).copyWith(
+          bodyLarge: const TextStyle(
+            fontFamily: config.fontFamily,
           ),
         ),
-      ),
-      initialRoute: "/",
-      routes: {
-        "/": (context) => const ChatterHome(),
-        "/login": (context) => const ChatterLogin(),
-        "/sign_up": (context) => const ChatterSignUp(),
-        "/chat": (context) => const ChatterScreen(),
-        // "/chats":(context) => ChatterScreen()
-      },
-    );
+  );
+}
+
+Map<String, WidgetBuilder> get getPlatformSpecificRoutes {
+  if (Platform.isIOS || Platform.isMacOS) {
+    return {
+      // "/": (context) => const CupertinoSplashScreen(),
+      // "/login": (context) => const CupertinoLoginScreen(),
+      // "/sign_up": (context) => const CupertinoSignUpScreen(),
+      // "/chat": (context) => const CupertinoChatScreen(),
+    };
+  } else {
+    return {
+      "/": (context) => const MaterialSplashScreen(),
+      "/login": (context) => const MaterialLoginScreen(),
+      "/sign_up": (context) => const MaterialSignUpScreen(),
+      "/chat": (context) => const MaterialChatScreen(),
+    };
   }
 }

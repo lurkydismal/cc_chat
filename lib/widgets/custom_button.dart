@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "package:cc_chat/config.dart" as config;
+
 class CustomButton extends StatelessWidget {
   final Color accentColor;
   final Color mainColor;
@@ -29,7 +31,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             text.toUpperCase(),
-            style: TextStyle(fontFamily: "Poppins", color: accentColor),
+            style: TextStyle(fontFamily: config.fontFamily, color: accentColor),
           ),
         ),
       ),

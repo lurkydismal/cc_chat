@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "package:cc_chat/config.dart" as config;
+
 class CustomTextInput extends StatelessWidget {
   final String hintText;
   final IconData leading;
@@ -39,7 +41,7 @@ class CustomTextInput extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: const TextStyle(
-            fontFamily: "Poppins",
+            fontFamily: config.fontFamily,
           ),
         ),
       ),
