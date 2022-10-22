@@ -1,6 +1,6 @@
 import "dart:io" show Platform;
 
-import "package:flutter/cupertino.dart";
+// import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
 // import "package:cc_chat/chat/chat_cupertino.dart";
@@ -22,23 +22,23 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || Platform.isMacOS) {
-      return CupertinoApp(
-        title: config.title,
-        // theme: MaterialBasedCupertinoThemeData(
-        //   materialTheme: getMaterialThemeData,
-        // ),
-        initialRoute: "/",
-        routes: getPlatformSpecificRoutes,
-      );
-    } else {
+  //   if (Platform.isIOS || Platform.isMacOS) {
+  //     return CupertinoApp(
+  //       title: config.title,
+  //       // theme: MaterialBasedCupertinoThemeData(
+  //       //   materialTheme: getMaterialThemeData,
+  //       // ),
+  //       initialRoute: "/",
+  //       routes: getPlatformSpecificRoutes,
+  //     );
+  //   } else {
       return MaterialApp(
         title: config.title,
         // theme: getMaterialThemeData,
         initialRoute: "/",
         routes: getPlatformSpecificRoutes,
       );
-    }
+    // }
   }
 }
 
@@ -54,19 +54,19 @@ ThemeData get getMaterialThemeData {
 }
 
 Map<String, WidgetBuilder> get getPlatformSpecificRoutes {
-  if (Platform.isIOS || Platform.isMacOS) {
-    return {
-      // "/": (context) => const CupertinoSplashScreen(),
-      // "/login": (context) => const CupertinoLoginScreen(),
-      // "/sign_up": (context) => const CupertinoSignUpScreen(),
-      // "/chat": (context) => const CupertinoChatScreen(),
-    };
-  } else {
+  // if (Platform.isIOS || Platform.isMacOS) {
+  //   return {
+  //     // "/": (context) => const CupertinoSplashScreen(),
+  //     // "/login": (context) => const CupertinoLoginScreen(),
+  //     // "/sign_up": (context) => const CupertinoSignUpScreen(),
+  //     // "/chat": (context) => const CupertinoChatScreen(),
+  //   };
+  // } else {
     return {
       "/": (context) => const MaterialSplashScreen(),
       "/login": (context) => const MaterialLoginScreen(),
       "/sign_up": (context) => const MaterialSignUpScreen(),
       "/chat": (context) => const MaterialChatScreen(),
     };
-  }
+  // }
 }
