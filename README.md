@@ -22,9 +22,8 @@
 
 ## Features
 
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Basic messanger functionality.
+* All platforms support.
 
 ## Screenshots
 
@@ -39,12 +38,14 @@ Project is: _in progress_.
 Room for improvement:
 
 * Improve code quality.
-* Improvement to be done 2
+* Improve UX.
+* Improve design.
+* Lazy load messages.
 
 To do:
 
-* Feature to be added 1
-* Feature to be added 2
+* Colors based on theme.
+* Attachments in messages.
 
 ## Acknowledgements
 
