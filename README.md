@@ -7,6 +7,7 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
+* [Setup](#setup)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
@@ -28,6 +29,13 @@
 ## Screenshots
 
 ![Example screenshot](./screenshots/screenshot.png)
+
+## Setup
+
+Edit **relay/db_connection.php** to follow your data.  
+Copy **relay/** contents to your host.  
+Edit **lib/config.dart** to follow your data.  
+Create database using **relay/chat_app.sql**.
 
 ## Project Status
 
