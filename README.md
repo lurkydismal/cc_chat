@@ -46,6 +46,8 @@ To do:
 
 * Colors based on theme.
 * Attachments in messages.
+* Add unit tests.
+* Add widget tests.
 
 ## Acknowledgements
 
