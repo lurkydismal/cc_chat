@@ -1,4 +1,4 @@
-# cc_chat
+# chat_app
 
 > A simple chat application.
 
