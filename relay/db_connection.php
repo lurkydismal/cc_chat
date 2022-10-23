@@ -3,7 +3,7 @@
 $db_address  = "localhost:3306";
 $db_username = "root";
 $db_password = "secretsecret";
-$db_name     = "cc_chat";
+$db_name     = "chat_app";
 
 $db_connection = new mysqli(
     $db_address,

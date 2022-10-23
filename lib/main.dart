@@ -3,15 +3,15 @@
 // import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
-// import "package:cc_chat/chat/chat_cupertino.dart";
-import "package:cc_chat/chat/chat_material.dart";
-import "package:cc_chat/config.dart" as config;
-// import "package:cc_chat/login/login_cupertino.dart";
-import "package:cc_chat/login/login_material.dart";
-// import "package:cc_chat/sign_up/sign_up_cupertino.dart";
-import "package:cc_chat/sign_up/sign_up_material.dart";
-// import "package:cc_chat/splash/splash_cupertino.dart";
-import "package:cc_chat/splash/splash_material.dart";
+// import "package:chat_app/chat/chat_cupertino.dart";
+import "package:chat_app/chat/chat_material.dart";
+import "package:chat_app/config.dart" as config;
+// import "package:chat_app/login/login_cupertino.dart";
+import "package:chat_app/login/login_material.dart";
+// import "package:chat_app/sign_up/sign_up_cupertino.dart";
+import "package:chat_app/sign_up/sign_up_material.dart";
+// import "package:chat_app/splash/splash_cupertino.dart";
+import "package:chat_app/splash/splash_material.dart";
 
 void main() {
   runApp(const ChatApp());

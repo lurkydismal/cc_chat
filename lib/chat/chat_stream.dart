@@ -4,10 +4,10 @@ import "package:flutter/material.dart";
 // import "package:flutter/cupertino.dart";
 import "package:http/http.dart" as http;
 
-import "package:cc_chat/config.dart" as config;
-// import "package:cc_chat/chat/message_bubble_cupertino.dart";
-import "package:cc_chat/chat/message_bubble_material.dart";
-import "package:cc_chat/user.dart";
+import "package:chat_app/config.dart" as config;
+// import "package:chat_app/chat/message_bubble_cupertino.dart";
+import "package:chat_app/chat/message_bubble_material.dart";
+import "package:chat_app/user.dart";
 
 class ChatStream extends StatefulWidget {
   const ChatStream({super.key});

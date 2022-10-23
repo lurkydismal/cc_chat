@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "package:cc_chat/config.dart" as config;
+import "package:chat_app/config.dart" as config;
 
 class MessageBubbleMaterial extends StatelessWidget {
   final String messageText;

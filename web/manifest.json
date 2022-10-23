@@ -1,6 +1,6 @@
 {
-    "name": "cc_chat",
-    "short_name": "cc_chat",
+    "name": "chat_app",
+    "short_name": "chat_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

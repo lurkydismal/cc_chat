@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 import "package:animated_text_kit/animated_text_kit.dart"
     show AnimatedTextKit, TyperAnimatedText;
 
-import "package:cc_chat/widgets/custom_button.dart";
-import "package:cc_chat/config.dart" as config;
+import "package:chat_app/widgets/custom_button.dart";
+import "package:chat_app/config.dart" as config;
 
 class MaterialSplashScreen extends StatefulWidget {
   const MaterialSplashScreen({super.key});

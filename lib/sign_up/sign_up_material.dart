@@ -5,9 +5,9 @@ import "package:flutter/material.dart";
 import "package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart"
     show ModalProgressHUD;
 
-import "package:cc_chat/config.dart" as config;
-import "package:cc_chat/widgets/custom_button.dart" show CustomButton;
-import "package:cc_chat/widgets/custom_text_input.dart" show CustomTextInput;
+import "package:chat_app/config.dart" as config;
+import "package:chat_app/widgets/custom_button.dart" show CustomButton;
+import "package:chat_app/widgets/custom_text_input.dart" show CustomTextInput;
 
 class MaterialSignUpScreen extends StatefulWidget {
   const MaterialSignUpScreen({super.key});
