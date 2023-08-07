@@ -130,12 +130,15 @@ class _MaterialLoginScreenState extends State<MaterialLoginScreen> {
                           setState(() {
                             _loggingIn = false;
                           });
-                          edgeAlert(context,
-                              title: "Login Failed",
-                              description: exception.toString(),
-                              gravity: Gravity.bottom,
-                              icon: Icons.error,
-                              backgroundColor: Colors.deepPurple[900]);
+
+                          if (context.mounted) {
+                            edgeAlert(context,
+                                title: "Login Failed",
+                                description: exception.toString(),
+                                gravity: Gravity.bottom,
+                                icon: Icons.error,
+                                backgroundColor: Colors.deepPurple[900]);
+                          }
                         }
                       } else {
                         edgeAlert(context,

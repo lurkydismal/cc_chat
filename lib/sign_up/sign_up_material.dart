@@ -133,12 +133,14 @@ class _MaterialSignUpScreenState extends State<MaterialSignUpScreen> {
                           setState(() {
                             _signingUp = false;
                           });
-                          edgeAlert(context,
-                              title: "Sign up Failed",
-                              description: exception.toString(),
-                              gravity: Gravity.bottom,
-                              icon: Icons.error,
-                              backgroundColor: Colors.deepPurple[900]);
+                          if (context.mounted) {
+                            edgeAlert(context,
+                                title: "Sign up Failed",
+                                description: exception.toString(),
+                                gravity: Gravity.bottom,
+                                icon: Icons.error,
+                                backgroundColor: Colors.deepPurple[900]);
+                          }
                         }
                       } else {
                         edgeAlert(context,
