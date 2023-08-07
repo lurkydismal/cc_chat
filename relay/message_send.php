@@ -30,7 +30,7 @@ $SQLQuery->bind_param( "is", $peer, $text );
 $result = $SQLQuery->execute();
 
 if ( $result === false ) {
-    echo "Message send failed: " . $db_connection->error;
+    echo htmlspecialchars( "Message send failed: " . $db_connection->error );
 
     die( "Message send failed: " . $db_connection->error );
 }

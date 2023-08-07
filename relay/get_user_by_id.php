@@ -26,7 +26,7 @@ $result = $SQLQuery->execute();
 
 if ( $result === true ) {
     while ( $row = $result->fetch_array() ) {
-        echo $row[ "name" ];
+        echo htmlspecialchars( $row[ "name" ] );
     }
 
 } else {

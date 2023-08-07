@@ -26,7 +26,7 @@ $result = $SQLQuery->execute();
 
 if ( $result === true ) {
     while ( $row = $result->fetch_array() ) {
-        echo $row[ "peer" ] . "|" . $row[ "text" ] . "|" . $row[ "timestamp" ];
+        echo htmlspecialchars( $row[ "peer" ] . "|" . $row[ "text" ] . "|" . $row[ "timestamp" ] );
     }
 
 } else {

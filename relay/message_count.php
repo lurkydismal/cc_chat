@@ -17,7 +17,7 @@ $result = $db_connection->query( $sql );
 
 if ( $result === true ) {
     while ( $row = $result->fetch_array() ) {
-        echo $row[ "count" ];
+        echo htmlspecialchars( $row[ "count" ] );
     }
 }
 

@@ -36,7 +36,7 @@ $SQLQuery->bind_param( "sss", $name, $email, $password );
 $result = $SQLQuery->execute();
 
 if ( $result === true ) {
-    echo "OK";
+    echo htmlspecialchars( "OK" );
 
 } else {
     die( "Failed to sign up user: " . $db_connection->error );

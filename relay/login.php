@@ -32,7 +32,7 @@ $result = $SQLQuery->execute();
 
 if ( $result === true ) {
     while ( $row = $result->fetch_array() ) {
-        echo $row[ "id" ] . "|" . $row[ "name" ] . "|" . $row[ "email" ];
+        echo htmlspecialchars( $row[ "id" ] . "|" . $row[ "name" ] . "|" . $row[ "email" ] );
     }
 
 } else {
