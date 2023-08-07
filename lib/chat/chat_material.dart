@@ -63,11 +63,11 @@ class _MaterialChatScreenState extends State<MaterialChatScreen> {
           ),
         ),
         backgroundColor: Colors.white10,
-        title: Row(
+        title: const Row(
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   config.title,
                   style: TextStyle(
@@ -108,7 +108,7 @@ class _MaterialChatScreenState extends State<MaterialChatScreen> {
               leading: const Icon(Icons.exit_to_app),
               title: const Text("Logout"),
               subtitle: const Text("Sign out of this account"),
-              onTap: () async {                
+              onTap: () async {
                 setState(() {
                   User.signOut();
                 });
