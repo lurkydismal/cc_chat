@@ -100,8 +100,10 @@ class _ChatStreamState extends State<ChatStream> {
     } else {
       return Center(
         child: (Platform.isIOS || Platform.isMacOS)
-            ? const CircularProgressIndicator(backgroundColor: Colors.deepPurple)
-            : const CircularProgressIndicator(backgroundColor: Colors.deepPurple),
+            ? const CircularProgressIndicator(
+                backgroundColor: Colors.deepPurple)
+            : const CircularProgressIndicator(
+                backgroundColor: Colors.deepPurple),
       );
     }
   }
