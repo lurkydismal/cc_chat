@@ -1,5 +1,7 @@
 # chat_app
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fc741a1170fb4cfa91c722d25e3a64e6)](https://app.codacy.com/gh/lurkydismal/chat_app/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 > A simple chat application.
 
 ## Table of Contents
@@ -23,7 +25,7 @@
 
 ## Features
 
-* Basic messanger functionality.
+* Basic text messanger functionality.
 * All platforms support.
 
 ## Screenshots
