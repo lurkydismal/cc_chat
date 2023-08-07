@@ -15,7 +15,7 @@ $SQLQuery = $mysqli->prepare(
 );
 
 if ( is_int( filter_input( INPUT_POST, "id", FILTER_VALIDATE_INT ) ) === false ) {
-    die( "Failed to get message id: " . $db_connection->error );
+    die( htmlspecialchars( "Failed to get message id: " . $db_connection->error ) );
 }
 
 $id = filter_input( INPUT_POST, "id" );
@@ -30,7 +30,7 @@ if ( $result === true ) {
     }
 
 } else {
-    die( "Failed to get message: " . $db_connection->error );
+    die( htmlspecialchars( "Failed to get message: " . $db_connection->error ) );
 }
 
 ?>

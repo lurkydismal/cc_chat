@@ -15,13 +15,13 @@ $SQLQuery = $mysqli->prepare(
 );
 
 if ( filter_input( INPUT_POST, "email", FILTER_VALIDATE_EMAIL ) === false ) {
-    die( "Failed to get user email: " . $db_connection->error );
+    die( htmlspecialchars( "Failed to get user email: " . $db_connection->error ) );
 }
 
 $email = filter_input( INPUT_POST, "email" );
 
 if ( filter_input( INPUT_POST, "password" ) === false ) {
-    die( "Failed to get user password: " . $db_connection->error );
+    die( htmlspecialchars( "Failed to get user password: " . $db_connection->error ) );
 }
 
 $password = htmlspecialchars( filter_input( INPUT_POST, "password" ) );
@@ -36,7 +36,7 @@ if ( $result === true ) {
     }
 
 } else {
-    die( "Login failed: " . $db_connection->error );
+    die( htmlspecialchars( "Login failed: " . $db_connection->error ) );
 }
 
 ?>

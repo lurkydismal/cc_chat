@@ -15,7 +15,7 @@ $db_connection = new mysqli(
 if ( $db_connection->connect_errno !== 0 ) {
     echo htmlspecialchars( "Connection failed: " . $db_connection->connect_error );
 
-    die( "Connection failed: " . $db_connection->connect_error );
+    die( htmlspecialchars( "Connection failed: " . $db_connection->connect_error ) );
 }
 
 ?>
