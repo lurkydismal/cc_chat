@@ -20,7 +20,7 @@ jobs:
 
       - uses: flutter-actions/setup-flutter@v2.2
 
-      - uses: dart-lang/setup-dart@196f54580e9eee2797c57e85e289339f85e6779d
+      - uses: dart-lang/setup-dart@cdb51fff2b088939ef86fe041b18e82cb4733522
         with:
           sdk: 'dev'
 
