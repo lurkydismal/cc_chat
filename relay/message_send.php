@@ -24,17 +24,17 @@ $SQLQuery = $mysqli->prepare(
     "
 );
 
-if ( isset( $_POST[ "peer" ] ) === false ) {
+if ( is_int( filter_input( INPUT_POST, "peer", FILTER_VALIDATE_INT ) ) === false ) {
     die( "Failed to get message peer: " . $db_connection->error );
 }
 
-$peer = $mysqli->real_escape_string( $_POST[ "peer" ] );
+$peer = filter_input( INPUT_POST, "peer" );
 
-if ( isset( $_POST[ "text" ] ) === false ) {
+if ( filter_input( INPUT_POST, "text" ) === false ) {
     die( "Failed to get message text: " . $db_connection->error );
 }
 
-$text = $mysqli->real_escape_string( $_POST[ "text" ] );
+$text = htmlspecialchars( filter_input( INPUT_POST, "text" ) );
 
 $SQLQuery->bind_param( "is", $peer, $text );
 

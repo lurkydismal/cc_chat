@@ -25,11 +25,11 @@ $SQLQuery = $mysqli->prepare(
     "
 );
 
-if ( isset( $_POST[ "id" ] ) === false ) {
+if ( is_int( filter_input( INPUT_POST, "id", FILTER_VALIDATE_INT ) ) === false ) {
     die( "Failed to get user id: " . $db_connection->error );
 }
 
-$id = $mysqli->real_escape_string( $_POST[ "id" ] );
+$id = filter_input( INPUT_POST, "id" );
 
 $SQLQuery->bind_param( "i", $id );
 

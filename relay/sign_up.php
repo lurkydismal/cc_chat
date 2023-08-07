@@ -25,23 +25,23 @@ $SQLQuery = $mysqli->prepare(
     "
 );
 
-if ( isset( $_POST[ "name" ] ) === false ) {
+if ( filter_input( INPUT_POST, "name" ) === false ) {
     die( "Failed to set user name: " . $db_connection->error );
 }
 
-$name = $mysqli->real_escape_string( $_POST[ "name" ] );
+$name = htmlspecialchars( filter_input( INPUT_POST, "name" ) );
 
-if ( isset( $_POST[ "email" ] ) === false ) {
+if ( filter_input( INPUT_POST, "email", FILTER_VALIDATE_EMAIL ) === false ) {
     die( "Failed to set user email: " . $db_connection->error );
 }
 
-$email = $mysqli->real_escape_string( $_POST[ "email" ] );
+$email = filter_input( INPUT_POST, "email" );
 
-if ( isset( $_POST[ "password" ] ) === false ) {
+if ( filter_input( INPUT_POST, "password" ) === false ) {
     die( "Failed to set user password: " . $db_connection->error );
 }
 
-$password = $mysqli->real_escape_string( $_POST[ "password" ] );
+$password = htmlspecialchars( filter_input( INPUT_POST, "password" ) );
 
 $SQLQuery->bind_param( "sss", $name, $email, $password );
 
