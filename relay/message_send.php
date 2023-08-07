@@ -6,17 +6,6 @@ http_response_code( 200 );
 
 require "db_connection.php";
 
-// $sql = sprintf(
-//     "
-//         INSERT INTO messages ( peer, text )
-//         VALUES ( %d, '%s' );
-//     ",
-//     $_POST[ "peer" ],
-//     $_POST[ "text" ],
-// );
-
-// $result = $db_connection->query( $sql );
-
 $SQLQuery = $mysqli->prepare(
     "
         INSERT INTO messages ( peer, text )

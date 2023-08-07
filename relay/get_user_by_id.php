@@ -6,17 +6,6 @@ http_response_code( 200 );
 
 require "db_connection.php";
 
-// $sql = sprintf(
-//     "
-//         SELECT (name)
-//         FROM users
-//         WHERE id = %d;
-//     ",
-//     $_POST[ "id" ],
-// );
-
-// $result = $db_connection->query( $sql );
-
 $SQLQuery = $mysqli->prepare(
     "
         SELECT (name)
