@@ -18,7 +18,7 @@ $sql = sprintf(
 
 $result = $db_connection->query( $sql );
 
-if ( $result ) {
+if ( $result === true ) {
     echo "OK";
 }
 

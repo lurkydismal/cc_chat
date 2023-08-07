@@ -15,7 +15,7 @@ $sql = (
 
 $result = $db_connection->query( $sql );
 
-if ( $result ) {
+if ( $result === true ) {
     while ( $row = $result->fetch_array() ) {
         echo $row[ "count" ];
     }
