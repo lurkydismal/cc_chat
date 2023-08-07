@@ -25,6 +25,10 @@ $SQLQuery = $mysqli->prepare(
     "
 );
 
+if ( isset( $_POST[ "id" ] ) === false ) {
+    die( "Failed to get message id: " . $db_connection->error );
+}
+
 $id = $mysqli->real_escape_string( $_POST[ "id" ] );
 
 $SQLQuery->bind_param( "i", $id );

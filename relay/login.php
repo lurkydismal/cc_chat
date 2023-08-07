@@ -26,7 +26,16 @@ $SQLQuery = $mysqli->prepare(
     "
 );
 
+if ( isset( $_POST[ "email" ] ) === false ) {
+    die( "Failed to get user email: " . $db_connection->error );
+}
+
 $email = $mysqli->real_escape_string( $_POST[ "email" ] );
+
+if ( isset( $_POST[ "password" ] ) === false ) {
+    die( "Failed to get user password: " . $db_connection->error );
+}
+
 $password = $mysqli->real_escape_string( $_POST[ "password" ] );
 
 $SQLQuery->bind_param( "ss", $email, $password );
