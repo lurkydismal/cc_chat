@@ -4,7 +4,7 @@ header( "Access-Control-Allow-Origin: *" );
 
 http_response_code( 200 );
 
-include "db_connection.php";
+require "db_connection.php";
 
 $sql = (
 "
