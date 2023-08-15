@@ -29,8 +29,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        flutter_version: [beta, dev, master]
-        dart_version: [beta, dev, main]
+        flutter_version: [beta, master]
+        dart_version: [stable, beta, dev, main]
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
