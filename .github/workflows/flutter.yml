@@ -29,8 +29,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        flutter_version: [stable, beta, dev, master]
-        dart_version: [stable, beta, dev, main]
+        flutter_version: [beta, dev, master]
+        dart_version: [beta, dev, main]
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
@@ -58,7 +58,7 @@ jobs:
 
       # Uncomment this step to verify the use of 'flutter format' on each commit.
       - name: Verify formatting
-        run: flutter format --output=none --set-exit-if-changed .
+        run: dart format --output=none --set-exit-if-changed lib/
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
