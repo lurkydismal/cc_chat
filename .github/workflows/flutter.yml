@@ -49,7 +49,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
           architecture: x64
 
-      - uses: dart-lang/setup-dart@0970dcf46e056fb521e7027775fdff076fe1e732
+      - uses: dart-lang/setup-dart@8a4b97ea2017cc079571daec46542f76189836b1
         with:
           sdk: ${{ matrix.dart_version }}
 
